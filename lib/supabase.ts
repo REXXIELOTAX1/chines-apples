@@ -15,6 +15,8 @@ export type Product = {
   is_featured: boolean | null;
   is_in_stock: boolean | null;
   created_at: string;
+  storage?: string;
+  color?: string;
 };
 
 export type CartItem = Product & { quantity: number };

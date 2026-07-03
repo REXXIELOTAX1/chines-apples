@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { ShoppingCart, MessageCircle } from 'lucide-react';
 import { Product, formatPrice, toNumber } from '@/lib/supabase';
 
@@ -9,13 +10,16 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
-  const whatsappLink = `https://wa.me/2348109377558?text=Hi%2C%20I%20want%20to%20order%20${encodeURIComponent(product.name)}%20priced%20at%20${formatPrice(product.price)}%20from%20Chine%20Apples%20Communication.`;
+  const [note, setNote] = useState('');
+
+  const noteText = note.trim() ? ` (Preference: ${note.trim()})` : '';
+  const whatsappLink = `https://wa.me/2348109377558?text=Hi%2C%20I%20want%20to%20order%20${encodeURIComponent(product.name + noteText)}%20priced%20at%20${formatPrice(product.price)}%20from%20Chine%20Apples%20Communication.`;
 
   const featured = product.is_featured ?? false;
   const inStock = product.is_in_stock ?? true;
 
   return (
-    <div className="transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,230,118,0.3)]">
+    <div className="min-w-0 transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,230,118,0.3)]">
       <div className="bg-brand-card border border-brand-border rounded-xl overflow-hidden h-full flex flex-col">
         <div className="relative w-full aspect-[4/3] overflow-hidden bg-brand-dark">
           <img
@@ -34,7 +38,16 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
         </div>
 
         <div className="p-4 flex-1 flex flex-col">
-          <h3 className="font-syne font-semibold text-white">{product.name}</h3>
+          <h3 className="font-syne font-semibold text-white truncate">{product.name}</h3>
+
+          {(product.storage || product.color) && (
+            <p className="text-gray-400 text-xs mt-1">
+              {product.storage}
+              {product.storage && product.color ? ' · ' : ''}
+              {product.color}
+            </p>
+          )}
+
           <p className="text-brand-green font-bold text-lg mt-2">{formatPrice(product.price)}</p>
 
           <div className="flex items-center gap-2 mt-1">
@@ -44,7 +57,15 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             </span>
           </div>
 
-          <div className="flex gap-2 mt-4">
+          <input
+            type="text"
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            placeholder="Color / storage preference (optional)"
+            className="mt-3 w-full bg-brand-dark border border-brand-border rounded-lg px-3 py-2 text-xs text-white placeholder:text-gray-500 focus:outline-none focus:border-brand-green"
+          />
+
+          <div className="flex flex-col sm:flex-row gap-2 mt-4">
             <button
               onClick={onAddToCart}
               className="flex-1 bg-brand-dark border border-brand-green/30 text-brand-green py-2 px-3 rounded-lg hover:bg-brand-green/10 transition-colors flex items-center justify-center gap-2 text-sm font-medium"

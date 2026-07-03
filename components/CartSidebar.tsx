@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import {
   X,
   Minus,
@@ -27,13 +27,19 @@ export default function CartSidebar({
   onUpdateQuantity,
   onRemoveItem,
 }: CartSidebarProps) {
+  const [notes, setNotes] = useState<Record<string, string>>({});
+
   const totalPrice = useMemo(() => {
     return items.reduce((sum, item) => sum + toNumber(item.price) * item.quantity, 0);
   }, [items]);
 
   const formatCartMessage = () => {
     const itemsList = items
-      .map((item, index) => `${index + 1}. ${item.name} x${item.quantity} - ${formatPrice(item.price)}`)
+      .map((item, index) => {
+        const note = notes[item.id]?.trim();
+        const noteText = note ? ` (Preference: ${note})` : '';
+        return `${index + 1}. ${item.name}${noteText} x${item.quantity} - ${formatPrice(item.price)}`;
+      })
       .join('\n');
     return `Hi, I want to order from Chine Apples Communication:\n\n${itemsList}\n\nTotal: ${formatPrice(totalPrice)}\n\nPlease confirm my order.`;
   };
@@ -96,6 +102,13 @@ export default function CartSidebar({
                         <Plus className="w-4 h-4 text-white" />
                       </button>
                     </div>
+                    <input
+                      type="text"
+                      value={notes[item.id] || ''}
+                      onChange={(e) => setNotes((prev) => ({ ...prev, [item.id]: e.target.value }))}
+                      placeholder="Color / storage preference (optional)"
+                      className="mt-3 w-full bg-brand-card border border-gray-700 rounded-lg px-3 py-1.5 text-xs text-white placeholder:text-gray-500 focus:outline-none focus:border-brand-green"
+                    />
                   </div>
                   <button
                     onClick={() => onRemoveItem(item.id)}
