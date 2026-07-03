@@ -70,14 +70,13 @@ export default function ImageUploadField({ value, onChange }: Props) {
             <span className="text-sm text-green-400">Tap to upload photo</span>
           </>
         )}
-        <input
-          type="file"
-          accept="image/*"
-          capture="environment"
-          onChange={handleFileSelect}
-          className="hidden"
-          disabled={uploading}
-        />
+       <input
+  type="file"
+  accept="image/*"
+  onChange={handleFileSelect}
+  className="hidden"
+  disabled={uploading}
+/>
       </label>
 
       {error && <p className="text-red-400 text-xs mt-1">{error}</p>}
