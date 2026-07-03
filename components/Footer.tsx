@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { Phone, Mail, MapPin, MessageCircle, Instagram } from 'lucide-react';
-
 function TikTokIcon({ size = 20, className = '' }: { size?: number; className?: string }) {
   return (
     <svg
@@ -19,7 +18,7 @@ function TikTokIcon({ size = 20, className = '' }: { size?: number; className?: 
 
 const socialLinks = [
   { name: 'Instagram', href: 'https://instagram.com/chineapples', icon: Instagram },
-  { name: 'TikTok', href: 'https://tiktok.com/@chineapples', icon: TikTokIcon },
+  { name: 'TikTok', href: 'https://www.tiktok.com/@chine_apples.com', icon: TikTokIcon },
 ];
 
 const quickLinks = [
@@ -44,30 +43,31 @@ export default function Footer() {
               alt="Chine Apples Communication Logo"
               className="w-10 h-10 mb-4 drop-shadow-[0_0_8px_rgba(0,230,118,0.6)]"
             />
-            <h3 className="text-white font-syne font-bold text-base sm:text-lg mb-2">
-              CHINE APPLES COMMUNICATION
-            </h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Your No.1 Gadget Store in Enugu. Genuine products, unbeatable prices.
-            </p>
+        <h3 className="text-white font-syne font-bold text-base sm:text-lg mb-2">
+  CHINE APPLES COMMUNICATION
+</h3>
 
-            <div className="flex gap-3 mt-5">
-              {socialLinks.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <a
-                    key={social.name}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.name}
-                    className="w-9 h-9 rounded-full bg-white/5 border border-[#00e676]/30 flex items-center justify-center text-[#00e676] hover:bg-[#00e676]/10 hover:border-[#00e676] transition-colors"
-                  >
-                    <Icon size={16} />
-                  </a>
-                );
-              })}
-            </div>
+<div className="flex gap-3 mb-4">
+  {socialLinks.map((social) => {
+    const Icon = social.icon;
+    return (
+      <a
+        key={social.name}
+        href={social.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={social.name}
+        className="w-9 h-9 rounded-full bg-white/5 border border-[#00e676]/30 flex items-center justify-center text-[#00e676] hover:bg-[#00e676]/10 hover:border-[#00e676] transition-colors"
+      >
+        <Icon size={16} />
+      </a>
+    );
+  })}
+</div>
+
+<p className="text-gray-400 text-sm leading-relaxed">
+  Your No.1 Gadget Store in Enugu. Genuine products, unbeatable prices.
+</p>
           </div>
 
           {/* Quick Links */}

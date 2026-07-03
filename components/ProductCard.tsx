@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { ShoppingCart, MessageCircle } from 'lucide-react';
 import { Product, formatPrice, toNumber } from '@/lib/supabase';
-
+import Image from 'next/image';
 interface ProductCardProps {
   product: Product;
   onAddToCart: () => void;

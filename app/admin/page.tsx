@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import { supabase, Product, CATEGORIES, formatPrice, toNumber } from '@/lib/supabase';
 import Link from 'next/link';
-
+import ImageUploadField from '@/components/ImageUploadField';
 const ADMIN_PASSWORD = 'idealwaysdeliver';
 
 type ProductForm = {
@@ -304,29 +304,10 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                <div>
-                  <label className="text-sm text-gray-400 mb-1 block">Image URL</label>
-                  <div className="relative">
-                    <input
-                      type="url"
-                      required
-                      value={form.image_url}
-                      onChange={e => setForm({ ...form, image_url: e.target.value })}
-                      className="w-full bg-brand-card border border-brand-border rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:border-brand-green focus:ring-1 focus:ring-brand-green outline-none pr-10"
-                      placeholder="https://res.cloudinary.com/..."
-                    />
-                    <ImageIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                  </div>
-                  {form.image_url && (
-                    <div className="mt-2 rounded-lg overflow-hidden h-32 bg-brand-card">
-                      <img
-                        src={form.image_url}
-                        alt="Preview"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  )}
-                </div>
+                <ImageUploadField
+                  value={form.image_url}
+                  onChange={(url: string) => setForm({ ...form, image_url: url })}
+                />
 
                 <div>
                   <label className="text-sm text-gray-400 mb-1 block">Description</label>

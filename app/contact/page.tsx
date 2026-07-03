@@ -20,7 +20,7 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you! We'll get back to you soon.");
+    alert("Thank you! We&apos;ll get back to you soon.");
     setFormData({ name: '', email: '', phone: '', message: '' });
     setShowSuccess(true);
     setTimeout(() => setShowSuccess(false), 3000);
@@ -42,7 +42,7 @@ export default function ContactPage() {
               <span className="text-white">Contact </span>
               <span className="text-brand-green">Us</span>
             </h1>
-            <p className="text-gray-400 text-lg mt-3">We'd love to hear from you</p>
+      <p className="text-gray-400 text-lg mt-3">We&apos;d love to hear from you</p>
           </div>
         </div>
 
@@ -77,7 +77,7 @@ export default function ContactPage() {
                 </button>
                 {showSuccess && (
                   <div className="p-4 bg-brand-green/10 border border-brand-green rounded-lg text-brand-green text-sm">
-                    Thank you! We'll get back to you soon.
+                    Thank you! We&apos;ll get back to you soon.
                   </div>
                 )}
               </form>

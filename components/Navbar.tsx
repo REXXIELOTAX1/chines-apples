@@ -3,8 +3,20 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Phone, ShoppingCart, Menu, X } from 'lucide-react';
-
+import { Phone, ShoppingCart, Menu, X,Instagram } from 'lucide-react';
+function TikTokIcon({ size = 20, className = '' }: { size?: number; className?: string }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+    >
+      <path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z" />
+    </svg>
+  );
+}
 interface NavbarProps {
   cartCount: number;
   onCartClick: () => void;
@@ -30,26 +42,50 @@ export default function Navbar({ cartCount, onCartClick }: NavbarProps) {
       <nav className="sticky top-0 z-50 bg-brand-black/95 backdrop-blur-md border-b border-brand-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 md:h-16">
-            {/* Logo and Brand Name */}
-            <Link href="/" className="flex items-center gap-2.5 md:gap-3">
-              <div className="transition-transform duration-500 hover:rotate-360 flex-shrink-0">
-                <img
-                  src="https://res.cloudinary.com/dwwqf4p69/image/upload/f_auto,q_auto/1000137475_ucfue0"
-                  alt="Chine Apples Communication Logo"
-                  width={44}
-                  height={44}
-                  className="md:w-[55px] md:h-[55px] drop-shadow-[0_0_8px_rgba(0,230,118,0.5)]"
-                />
-              </div>
-              <div className="hidden sm:block">
-                <p className="text-[10px] sm:text-xs font-syne font-semibold text-white tracking-wide leading-tight">
-                  CHINE APPLES
-                </p>
-                <p className="text-[10px] sm:text-xs font-syne font-semibold text-brand-green tracking-wide leading-tight">
-                  COMMUNICATION
-                </p>
-              </div>
-            </Link>
+        {/* Logo and Brand Name */}
+<div className="flex items-center gap-2.5 md:gap-3">
+  <Link href="/" className="flex items-center gap-2.5 md:gap-3">
+    <div className="transition-transform duration-500 hover:rotate-360 flex-shrink-0">
+      <img
+        src="https://res.cloudinary.com/dwwqf4p69/image/upload/f_auto,q_auto/1000137475_ucfue0"
+        alt="Chine Apples Communication Logo"
+        width={44}
+        height={44}
+        className="md:w-[55px] md:h-[55px] drop-shadow-[0_0_8px_rgba(0,230,118,0.5)]"
+      />
+    </div>
+    <div className="hidden sm:block">
+      <p className="text-[10px] sm:text-xs font-syne font-semibold text-white tracking-wide leading-tight">
+        CHINE APPLES
+      </p>
+      <p className="text-[10px] sm:text-xs font-syne font-semibold text-brand-green tracking-wide leading-tight">
+        COMMUNICATION
+      </p>
+    </div>
+  </Link>
+
+  {/* Social Icons */}
+  <div className="hidden sm:flex items-center gap-2 ml-1">
+    <a
+      href="https://instagram.com/chineapples"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Instagram"
+      className="w-7 h-7 rounded-full bg-white/5 border border-brand-green/30 flex items-center justify-center text-brand-green hover:bg-brand-green/10 hover:border-brand-green transition-colors"
+    >
+      <Instagram size={14} />
+    </a>
+    <a
+      href="https://www.tiktok.com/@chine_apples.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="TikTok"
+      className="w-7 h-7 rounded-full bg-white/5 border border-brand-green/30 flex items-center justify-center text-brand-green hover:bg-brand-green/10 hover:border-brand-green transition-colors"
+    >
+      <TikTokIcon size={14} />
+    </a>
+  </div>
+</div>
 
             {/* Desktop Navigation Links */}
             <div className="hidden md:flex items-center gap-6 lg:gap-8">
