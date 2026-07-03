@@ -64,8 +64,8 @@ export default function Navbar({ cartCount, onCartClick }: NavbarProps) {
     </div>
   </Link>
 
-  {/* Social Icons */}
-  <div className="hidden sm:flex items-center gap-2 ml-1">
+{/* Social Icons */}
+<div className="flex items-center gap-2 ml-1">
     <a
       href="https://instagram.com/chineapples"
       target="_blank"
