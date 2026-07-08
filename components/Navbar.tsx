@@ -54,14 +54,14 @@ export default function Navbar({ cartCount, onCartClick }: NavbarProps) {
         className="md:w-[55px] md:h-[55px] drop-shadow-[0_0_8px_rgba(0,230,118,0.5)]"
       />
     </div>
-    <div className="hidden sm:block">
-      <p className="text-[10px] sm:text-xs font-syne font-semibold text-white tracking-wide leading-tight">
-        CHINE APPLES
-      </p>
-      <p className="text-[10px] sm:text-xs font-syne font-semibold text-brand-green tracking-wide leading-tight">
-        COMMUNICATION
-      </p>
-    </div>
+  <div className="block min-w-0">
+  <p className="text-[7px] xs:text-[9px] sm:text-xs font-syne font-semibold text-white tracking-wide leading-tight whitespace-nowrap">
+    CHINE APPLES
+  </p>
+  <p className="text-[7px] xs:text-[9px] sm:text-xs font-syne font-semibold text-brand-green tracking-wide leading-tight whitespace-nowrap">
+    COMMUNICATION
+  </p>
+</div>
   </Link>
 
 {/* Social Icons */}
@@ -103,7 +103,6 @@ export default function Navbar({ cartCount, onCartClick }: NavbarProps) {
                 </Link>
               ))}
             </div>
-
             {/* Right Side */}
             <div className="flex items-center gap-3 md:gap-4 lg:gap-6">
               {/* Phone Number - Desktop only */}

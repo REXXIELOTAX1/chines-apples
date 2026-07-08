@@ -141,15 +141,15 @@ export default function Home() {
   {/* Videos below */}
   <div className="flex gap-2 w-full px-2">
     <div className="flex flex-col items-center gap-1 flex-1">
-      <video autoPlay muted loop playsInline className="w-full h-52 object-cover rounded-2xl shadow-xl border-2 border-brand-green/50">
-        <source src="https://res.cloudinary.com/dwwqf4p69/video/upload/c8cf8fe1cac54c10d2d4e640f8ab5412_mtxlid.mp4" type="video/mp4" />
-      </video>
+      <video autoPlay muted loop playsInline preload="metadata" poster="https://res.cloudinary.com/dwwqf4p69/image/upload/f_auto,q_auto,w_600/1000137475_ucfue0" className="w-full h-52 object-cover rounded-2xl shadow-xl border-2 border-brand-green/50">
+  <source src="https://res.cloudinary.com/dwwqf4p69/video/upload/f_auto,q_auto,w_600/c8cf8fe1cac54c10d2d4e640f8ab5412_mtxlid.mp4" type="video/mp4" />
+</video>
       <p className="text-center text-white text-[9px] font-bold bg-brand-green/80 rounded-lg px-2 py-0.5 w-full">📱 iPhone 17 Pro</p>
     </div>
     <div className="flex flex-col items-center gap-1 flex-1">
-      <video autoPlay muted loop playsInline className="w-full h-52 object-cover rounded-2xl shadow-xl border-2 border-brand-green/50">
-        <source src="https://res.cloudinary.com/dwwqf4p69/video/upload/148326b8820bae6e85b7704abe40bcfb_ed7ggr.mp4" type="video/mp4" />
-      </video>
+     <video autoPlay muted loop playsInline preload="metadata" poster="https://res.cloudinary.com/dwwqf4p69/image/upload/f_auto,q_auto,w_600/1000137475_ucfue0" className="w-full h-52 object-cover rounded-2xl shadow-xl border-2 border-brand-green/50">
+  <source src="https://res.cloudinary.com/dwwqf4p69/video/upload/f_auto,q_auto,w_600/148326b8820bae6e85b7704abe40bcfb_ed7ggr.mp4" type="video/mp4" />
+</video>
       <p className="text-center text-white text-[9px] font-bold bg-brand-green/80 rounded-lg px-2 py-0.5 w-full">📱 Samsung S26</p>
     </div>
   </div>
@@ -169,15 +169,15 @@ export default function Home() {
                     </div>
                     <div className="flex gap-4">
                       <div className="relative animate-float" style={{ animationDelay: '0s' }}>
-                        <video autoPlay muted loop playsInline className="w-56 h-[420px] object-cover rounded-3xl shadow-2xl border-2 border-brand-green/50">
-                          <source src="https://res.cloudinary.com/dwwqf4p69/video/upload/c8cf8fe1cac54c10d2d4e640f8ab5412_mtxlid.mp4" type="video/mp4" />
-                        </video>
+                       <video autoPlay muted loop playsInline preload="metadata" poster="https://res.cloudinary.com/dwwqf4p69/image/upload/f_auto,q_auto,w_600/1000137475_ucfue0" className="w-56 h-[420px] object-cover rounded-3xl shadow-2xl border-2 border-brand-green/50">
+                 <source src="https://res.cloudinary.com/dwwqf4p69/video/upload/f_auto,q_auto,w_600/c8cf8fe1cac54c10d2d4e640f8ab5412_mtxlid.mp4" type="video/mp4" />
+                 </video>
                         <p className="absolute bottom-2 left-0 right-0 text-center text-white text-xs font-bold bg-brand-green/80 rounded-xl mx-2 p-1"> iPhone 17 Pro Max all In Stock</p>
                       </div>
                       <div className="relative animate-float" style={{ animationDelay: '0.4s' }}>
-                        <video autoPlay muted loop playsInline className="w-56 h-[420px] object-cover rounded-3xl shadow-2xl border-2 border-brand-green/50">
-                          <source src="https://res.cloudinary.com/dwwqf4p69/video/upload/148326b8820bae6e85b7704abe40bcfb_ed7ggr.mp4" type="video/mp4" />
-                        </video>
+                       <video autoPlay muted loop playsInline preload="metadata" poster="https://res.cloudinary.com/dwwqf4p69/image/upload/f_auto,q_auto,w_600/1000137475_ucfue0" className="w-56 h-[420px] object-cover rounded-3xl shadow-2xl border-2 border-brand-green/50">
+                     <source src="https://res.cloudinary.com/dwwqf4p69/video/upload/f_auto,q_auto,w_600/148326b8820bae6e85b7704abe40bcfb_ed7ggr.mp4" type="video/mp4" />
+                     </video>
                         <p className="absolute bottom-2 left-0 right-0 text-center text-white text-xs font-bold bg-brand-green/80 rounded-xl mx-2 p-1"> Samsung S26 Ultra all In Stock</p>
                       </div>
                     </div>
