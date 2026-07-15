@@ -14,6 +14,8 @@ export type Product = {
   description: string | null;
   is_featured: boolean | null;
   is_in_stock: boolean | null;
+  old_price?: number | null;
+  is_discounted?: boolean | null;
   created_at: string;
   storage?: string;
   color?: string;

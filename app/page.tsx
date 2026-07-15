@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Shield, Truck, HeadphonesIcon, Award, CheckCircle, Smartphone } from 'lucide-react';
-import { supabase, Product, getWhatsAppUrl } from '@/lib/supabase';
+import { Shield, Truck, HeadphonesIcon, Award, CheckCircle, Smartphone, Tag } from 'lucide-react';import { supabase, Product, getWhatsAppUrl } from '@/lib/supabase';
 import { useCart } from '@/components/CartProvider';
 import ProductCard from '@/components/ProductCard';
 import Navbar from '@/components/Navbar';
@@ -45,10 +44,43 @@ export default function Home() {
   ];
 
   return (
-    <>
-      <Navbar cartCount={cartCount} onCartClick={openCart} />
+  <>
+    <Navbar cartCount={cartCount} onCartClick={openCart} />
+<div className="px-4 md:px-8 pt-4">
+  <div className="max-w-7xl mx-auto">
+    <Link
+      href="/deals"
+      className="block bg-red-950/40 border-2 border-red-600 rounded-2xl p-4 md:p-5 pt-6 md:pt-7 relative hover:border-red-500 transition-colors shadow-lg shadow-red-600/20"
+    >
+      <div className="absolute -top-3 left-4 bg-red-600 text-white text-[10px] md:text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 whitespace-nowrap shadow-md">
+        🔥 HOT DEALS!
+      </div>
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="relative w-12 h-12 md:w-14 md:h-14 flex-shrink-0 flex items-center justify-center">
+            <Tag
+              size={40}
+              className="text-red-600 fill-red-600 rotate-[-15deg] drop-shadow-[0_0_8px_rgba(220,38,38,0.6)]"
+              strokeWidth={1.5}
+            />
+            <span className="absolute text-white font-bold text-xs rotate-[-15deg]">%</span>
+            <span className="absolute top-0 right-0 w-1 h-1 bg-red-400 rounded-full animate-ping" />
+            <span className="absolute bottom-1 right-1 w-1 h-1 bg-red-400 rounded-full" />
+          </div>
+          <div>
+            <p className="text-white font-bold text-sm md:text-base">Up to 20% OFF</p>
+            <p className="text-gray-400 text-xs md:text-sm">on selected devices</p>
+          </div>
+        </div>
+        <span className="bg-red-600 text-white text-xs md:text-sm font-semibold px-3 md:px-4 py-2 rounded-lg whitespace-nowrap hover:bg-red-700 transition-colors">
+          View Deals →
+        </span>
+      </div>
+    </Link>
+  </div>
+</div>
 
-      <main className="bg-brand-black">
+    <main className="bg-brand-black">
         {/* Hero Section */}
         <section className="relative min-h-[100dvh] md:min-h-screen flex items-center overflow-hidden">
           <div

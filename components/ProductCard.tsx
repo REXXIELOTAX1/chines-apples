@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { ShoppingCart, MessageCircle } from 'lucide-react';
 import { Product, formatPrice, toNumber } from '@/lib/supabase';
-import Image from 'next/image';
+
 interface ProductCardProps {
   product: Product;
   onAddToCart: () => void;
@@ -32,6 +32,11 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
               HOT
             </div>
           )}
+          {product.is_discounted && product.old_price && (
+            <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full font-bold animate-pulse shadow-lg shadow-red-600/50">
+              -{Math.round(((toNumber(product.old_price) - toNumber(product.price)) / toNumber(product.old_price)) * 100)}%
+            </div>
+          )}
           <div className="absolute top-2 right-2 bg-brand-green/20 text-brand-green text-xs px-2 py-0.5 rounded-full">
             {product.category}
           </div>
@@ -48,7 +53,12 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             </p>
           )}
 
-          <p className="text-brand-green font-bold text-lg mt-2">{formatPrice(product.price)}</p>
+          <div className="flex items-center gap-2 mt-2">
+            <p className="text-brand-green font-bold text-lg">{formatPrice(product.price)}</p>
+            {product.is_discounted && product.old_price && (
+              <p className="text-gray-500 text-sm line-through">{formatPrice(product.old_price)}</p>
+            )}
+          </div>
 
           <div className="flex items-center gap-2 mt-1">
             <div className={`w-2 h-2 rounded-full ${inStock ? 'bg-brand-green' : 'bg-red-500'}`} />

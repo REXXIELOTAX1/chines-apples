@@ -14,20 +14,24 @@ type ProductForm = {
   name: string;
   category: string;
   price: string;
+  old_price: string;
   image_url: string;
   description: string;
   is_featured: boolean;
   is_in_stock: boolean;
+  is_discounted: boolean;
 };
 
 const emptyForm: ProductForm = {
   name: '',
   category: 'iPhones',
   price: '',
+  old_price: '',
   image_url: '',
   description: '',
   is_featured: false,
   is_in_stock: true,
+  is_discounted: false,
 };
 
 export default function AdminPage() {
@@ -76,10 +80,12 @@ export default function AdminPage() {
       name: form.name,
       category: form.category as Product['category'],
       price: parseInt(form.price, 10),
+      old_price: form.old_price ? parseInt(form.old_price, 10) : null,
       image_url: form.image_url,
       description: form.description || null,
       is_featured: form.is_featured,
       is_in_stock: form.is_in_stock,
+      is_discounted: form.is_discounted,
     };
 
     if (editingId) {
@@ -114,10 +120,12 @@ export default function AdminPage() {
       name: product.name,
       category: product.category,
       price: toNumber(product.price).toString(),
+      old_price: product.old_price ? toNumber(product.old_price).toString() : '',
       image_url: product.image_url,
       description: product.description || '',
       is_featured: product.is_featured ?? false,
       is_in_stock: product.is_in_stock ?? true,
+      is_discounted: product.is_discounted ?? false,
     });
     setEditingId(product.id);
     setShowForm(true);
@@ -278,7 +286,7 @@ export default function AdminPage() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   <div>
                     <label className="text-sm text-gray-400 mb-1 block">Category</label>
                     <select
@@ -302,6 +310,16 @@ export default function AdminPage() {
                       placeholder="e.g. 850000"
                     />
                   </div>
+                  <div>
+                    <label className="text-sm text-gray-400 mb-1 block">Old Price (₦)</label>
+                    <input
+                      type="number"
+                      value={form.old_price}
+                      onChange={e => setForm({ ...form, old_price: e.target.value })}
+                      className="w-full bg-brand-card border border-brand-border rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:border-brand-green focus:ring-1 focus:ring-brand-green outline-none"
+                      placeholder="e.g. 950000"
+                    />
+                  </div>
                 </div>
 
                 <ImageUploadField
@@ -320,7 +338,7 @@ export default function AdminPage() {
                   />
                 </div>
 
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-6 flex-wrap">
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
                       type="checkbox"
@@ -341,6 +359,17 @@ export default function AdminPage() {
                     />
                     <span className="text-sm text-gray-300 flex items-center gap-1">
                       <Package className="w-3 h-3 text-brand-green" /> In Stock
+                    </span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={form.is_discounted}
+                      onChange={e => setForm({ ...form, is_discounted: e.target.checked })}
+                      className="w-4 h-4 rounded border-brand-border accent-red-500"
+                    />
+                    <span className="text-sm text-gray-300 flex items-center gap-1">
+                      🔴 Mark as Discounted
                     </span>
                   </label>
                 </div>
