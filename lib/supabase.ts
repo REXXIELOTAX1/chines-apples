@@ -17,8 +17,8 @@ export type Product = {
   old_price?: number | null;
   is_discounted?: boolean | null;
   created_at: string;
-  storage?: string;
-  color?: string;
+  storage: string | null;
+  color: string | null;
 };
 
 export type CartItem = Product & { quantity: number };

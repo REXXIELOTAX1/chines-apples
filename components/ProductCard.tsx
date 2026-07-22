@@ -53,6 +53,12 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             </p>
           )}
 
+          {product.description && (
+            <p className="text-gray-400 text-xs mt-1 line-clamp-2">
+              {product.description}
+            </p>
+          )}
+
           <div className="flex items-center gap-2 mt-2">
             <p className="text-brand-green font-bold text-lg">{formatPrice(product.price)}</p>
             {product.is_discounted && product.old_price && (

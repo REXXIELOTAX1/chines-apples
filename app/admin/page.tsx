@@ -15,8 +15,10 @@ type ProductForm = {
   category: string;
   price: string;
   old_price: string;
+  storage: string | null;
+color: string | null;
   image_url: string;
-  description: string;
+description: string | null;
   is_featured: boolean;
   is_in_stock: boolean;
   is_discounted: boolean;
@@ -27,6 +29,8 @@ const emptyForm: ProductForm = {
   category: 'iPhones',
   price: '',
   old_price: '',
+  storage: '',
+  color: '',
   image_url: '',
   description: '',
   is_featured: false,
@@ -81,6 +85,8 @@ export default function AdminPage() {
       category: form.category as Product['category'],
       price: parseInt(form.price, 10),
       old_price: form.old_price ? parseInt(form.old_price, 10) : null,
+      storage: form.storage || null,
+      color: form.color || null,
       image_url: form.image_url,
       description: form.description || null,
       is_featured: form.is_featured,
@@ -121,6 +127,8 @@ export default function AdminPage() {
       category: product.category,
       price: toNumber(product.price).toString(),
       old_price: product.old_price ? toNumber(product.old_price).toString() : '',
+      storage: product.storage || '',
+      color: product.color || '',
       image_url: product.image_url,
       description: product.description || '',
       is_featured: product.is_featured ?? false,
@@ -318,6 +326,26 @@ export default function AdminPage() {
                       onChange={e => setForm({ ...form, old_price: e.target.value })}
                       className="w-full bg-brand-card border border-brand-border rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:border-brand-green focus:ring-1 focus:ring-brand-green outline-none"
                       placeholder="e.g. 950000"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm text-gray-400 mb-1 block">Storage</label>
+                    <input
+                      type="text"
+                      value={form.storage}
+                      onChange={e => setForm({ ...form, storage: e.target.value })}
+                      className="w-full bg-brand-card border border-brand-border rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:border-brand-green focus:ring-1 focus:ring-brand-green outline-none"
+                      placeholder="e.g. 128GB"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm text-gray-400 mb-1 block">Color</label>
+                    <input
+                      type="text"
+                      value={form.color}
+                      onChange={e => setForm({ ...form, color: e.target.value })}
+                      className="w-full bg-brand-card border border-brand-border rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:border-brand-green focus:ring-1 focus:ring-brand-green outline-none"
+                      placeholder="e.g. Space Gray"
                     />
                   </div>
                 </div>
