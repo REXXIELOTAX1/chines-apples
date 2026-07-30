@@ -12,8 +12,19 @@ interface ProductCardProps {
 export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
   const [note, setNote] = useState('');
 
-  const noteText = note.trim() ? ` (Preference: ${note.trim()})` : '';
-  const whatsappLink = `https://wa.me/2348109377558?text=Hi%2C%20I%20want%20to%20order%20${encodeURIComponent(product.name + noteText)}%20priced%20at%20${formatPrice(product.price)}%20from%20Chine%20Apples%20Communication.`;
+  const noteText = note.trim() ? (' (Preference: ' + note.trim() + ')') : '';
+  const descText = product.description ? (' Details: ' + product.description) : '';
+
+  const message =
+    'Hi, I want to order ' +
+    product.name +
+    noteText +
+    ' priced at ' +
+    formatPrice(product.price) +
+    ' from Chine Apples Communication.' +
+    descText;
+
+  const whatsappLink = 'https://wa.me/2348109377558?text=' + encodeURIComponent(message);
 
   const featured = product.is_featured ?? false;
   const inStock = product.is_in_stock ?? true;
@@ -54,7 +65,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           )}
 
           {product.description && (
-            <p className="text-gray-400 text-xs mt-1 line-clamp-2">
+            <p className="text-gray-400 text-xs mt-1 whitespace-pre-line">
               {product.description}
             </p>
           )}
@@ -67,8 +78,8 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           </div>
 
           <div className="flex items-center gap-2 mt-1">
-            <div className={`w-2 h-2 rounded-full ${inStock ? 'bg-brand-green' : 'bg-red-500'}`} />
-            <span className={`text-xs ${inStock ? 'text-brand-green' : 'text-red-400'}`}>
+            <div className={'w-2 h-2 rounded-full ' + (inStock ? 'bg-brand-green' : 'bg-red-500')} />
+            <span className={'text-xs ' + (inStock ? 'text-brand-green' : 'text-red-400')}>
               {inStock ? 'In Stock' : 'Out of Stock'}
             </span>
           </div>

@@ -35,6 +35,8 @@ export default function Navbar({ cartCount, onCartClick }: NavbarProps) {
     { label: 'iPhones', href: '/iphones' },
     { label: 'Samsung', href: '/samsung' },
     { label: 'Airpods', href: '/airpods' },
+   { label: 'Networking', href: '/networking' },
+   { label: 'Accessories', href: '/accessories' },
     { label: 'Contact', href: '/contact' },
   ];
 

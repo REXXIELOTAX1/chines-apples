@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Shield, Truck, HeadphonesIcon, Award, CheckCircle, Smartphone, Tag } from 'lucide-react';import { supabase, Product, getWhatsAppUrl } from '@/lib/supabase';
+import { Shield, Truck, HeadphonesIcon, Award, CheckCircle, Smartphone, Tag } from 'lucide-react';
+import { supabase, Product, getWhatsAppUrl } from '@/lib/supabase';
 import { useCart } from '@/components/CartProvider';
 import ProductCard from '@/components/ProductCard';
 import Navbar from '@/components/Navbar';
@@ -43,55 +44,54 @@ export default function Home() {
     { icon: Award, title: 'Best Prices', description: 'We offer the most competitive prices in Enugu. Price match guaranteed.', badge: 'Price Match' },
   ];
 
-  return (
-  <>
-    <Navbar cartCount={cartCount} onCartClick={openCart} />
-<div className="px-4 md:px-8 pt-4">
-  <div className="max-w-7xl mx-auto">
-    <Link
-      href="/deals"
-      className="block bg-red-950/40 border-2 border-red-600 rounded-2xl p-4 md:p-5 pt-6 md:pt-7 relative hover:border-red-500 transition-colors shadow-lg shadow-red-600/20"
-    >
-      <div className="absolute -top-3 left-4 bg-red-600 text-white text-[10px] md:text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 whitespace-nowrap shadow-md">
-        🔥 HOT DEALS!
-      </div>
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <div className="relative w-12 h-12 md:w-14 md:h-14 flex-shrink-0 flex items-center justify-center">
-            <Tag
-              size={40}
-              className="text-red-600 fill-red-600 rotate-[-15deg] drop-shadow-[0_0_8px_rgba(220,38,38,0.6)]"
-              strokeWidth={1.5}
-            />
-            <span className="absolute text-white font-bold text-xs rotate-[-15deg]">%</span>
-            <span className="absolute top-0 right-0 w-1 h-1 bg-red-400 rounded-full animate-ping" />
-            <span className="absolute bottom-1 right-1 w-1 h-1 bg-red-400 rounded-full" />
-          </div>
-          <div>
-            <p className="text-white font-bold text-sm md:text-base">Up to 20% OFF</p>
-            <p className="text-gray-400 text-xs md:text-sm">on selected devices</p>
-          </div>
-        </div>
-        <span className="bg-red-600 text-white text-xs md:text-sm font-semibold px-3 md:px-4 py-2 rounded-lg whitespace-nowrap hover:bg-red-700 transition-colors">
-          View Deals →
-        </span>
-      </div>
-    </Link>
-  </div>
-</div>
+  const leftColClass = 'order-2 lg:order-1 text-center lg:text-left ' + (isVisible ? 'animate-fade-in-up' : 'opacity-0');
+  const heroBgStyle = {
+    backgroundImage: "url('https://res.cloudinary.com/dwwqf4p69/image/upload/f_auto,q_auto/1000137475_ucfue0')",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+  };
 
-    <main className="bg-brand-black">
+  return (
+    <>
+      <Navbar cartCount={cartCount} onCartClick={openCart} />
+
+      <div className="px-4 md:px-8 pt-4">
+        <div className="max-w-7xl mx-auto">
+          <Link
+            href="/deals"
+      className="block bg-red-950/40 border-2 border-red-600 rounded-2xl p-4 md:p-5 pt-6 md:pt-7 relative hover:border-red-500 transition-colors shadow-lg shadow-red-600/20"          >
+            <div className="absolute -top-3 left-4 bg-red-600 text-white text-[10px] md:text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 whitespace-nowrap shadow-md">
+              🔥 HOT DEALS!
+            </div>
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className="relative w-12 h-12 md:w-14 md:h-14 flex-shrink-0 flex items-center justify-center">
+                  <Tag
+                    size={40}
+                    className="text-red-600 fill-red-600 rotate-[-15deg] drop-shadow-[0_0_8px_rgba(220,38,38,0.6)]"
+                    strokeWidth={1.5}
+                  />
+                  <span className="absolute text-white font-bold text-xs rotate-[-15deg]">%</span>
+                  <span className="absolute top-0 right-0 w-1 h-1 bg-red-400 rounded-full animate-ping" />
+                  <span className="absolute bottom-1 right-1 w-1 h-1 bg-red-400 rounded-full" />
+                </div>
+                <div>
+                  <p className="text-white font-bold text-sm md:text-base">Discounted Devices</p>
+                </div>
+              </div>
+              <span className="bg-red-600 text-white text-xs md:text-sm font-semibold px-3 md:px-4 py-2 rounded-lg whitespace-nowrap hover:bg-red-700 transition-colors">
+                View Deals →
+              </span>
+            </div>
+          </Link>
+        </div>
+      </div>
+
+      <main className="bg-brand-black">
         {/* Hero Section */}
         <section className="relative min-h-[100dvh] md:min-h-screen flex items-center overflow-hidden">
-          <div
-            className="absolute inset-0 z-0"
-            style={{
-              backgroundImage: `url('https://res.cloudinary.com/dwwqf4p69/image/upload/f_auto,q_auto/1000137475_ucfue0')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-            }}
-          />
+          <div className="absolute inset-0 z-0" style={heroBgStyle} />
           <div className="absolute inset-0 z-10 bg-gradient-to-b from-brand-black/70 via-brand-black/85 to-brand-black" />
           <div className="absolute top-1/4 right-0 w-96 h-96 bg-brand-green/5 rounded-full blur-3xl z-10" />
           <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-brand-green/5 rounded-full blur-3xl z-10" />
@@ -101,7 +101,7 @@ export default function Home() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
 
                 {/* Left Column */}
-                <div className={`order-2 lg:order-1 text-center lg:text-left ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+                <div className={leftColClass}>
                   <div className="inline-flex items-center justify-center mb-4 md:mb-6">
                     <span className="bg-brand-green/10 border border-brand-green/30 text-brand-green text-[10px] md:text-xs font-semibold tracking-wider uppercase px-3 md:px-4 py-1.5 md:py-2 rounded-full">
                       Enugu&apos;s No.1 Gadget Store
@@ -143,7 +143,7 @@ export default function Home() {
                       <p className="text-gray-500 text-xs md:text-sm mt-0.5">Products</p>
                     </div>
                     <div className="text-center lg:text-left">
-                      <p className="font-syne font-bold text-xl md:text-2xl text-brand-green">2K+</p>
+                      <p className="font-syne font-bold text-xl md:text-2xl text-brand-green">3K+</p>
                       <p className="text-gray-500 text-xs md:text-sm mt-0.5">Customers</p>
                     </div>
                     <div className="text-center lg:text-left">
@@ -153,43 +153,9 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Right Column - Video Showcase */}
-                <div className={`order-1 lg:order-2 flex justify-center items-center ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
-
-              {/* Mobile */}
-<div className="lg:hidden flex flex-col items-center gap-3 pt-2">
-  
-  {/* Floating Card - on top */}
-  <div className="bg-brand-card/90 backdrop-blur-md border border-brand-green/30 rounded-2xl px-4 py-2 shadow-xl flex items-center gap-3 animate-float">
-    <div className="w-8 h-8 rounded-xl bg-brand-green/10 flex items-center justify-center">
-      <Smartphone size={16} className="text-brand-green" />
-    </div>
-    <div>
-      <p className="text-white font-syne font-bold text-xs">Chine Apples</p>
-      <p className="text-brand-green text-[10px]">Communication</p>
-    </div>
-  </div>
-
-  {/* Videos below */}
-  <div className="flex gap-2 w-full px-2">
-    <div className="flex flex-col items-center gap-1 flex-1">
-      <video autoPlay muted loop playsInline preload="metadata" poster="https://res.cloudinary.com/dwwqf4p69/image/upload/f_auto,q_auto,w_600/1000137475_ucfue0" className="w-full h-52 object-cover rounded-2xl shadow-xl border-2 border-brand-green/50">
-  <source src="https://res.cloudinary.com/dwwqf4p69/video/upload/f_auto,q_auto,w_600/c8cf8fe1cac54c10d2d4e640f8ab5412_mtxlid.mp4" type="video/mp4" />
-</video>
-      <p className="text-center text-white text-[9px] font-bold bg-brand-green/80 rounded-lg px-2 py-0.5 w-full">📱 iPhone 17 Pro</p>
-    </div>
-    <div className="flex flex-col items-center gap-1 flex-1">
-     <video autoPlay muted loop playsInline preload="metadata" poster="https://res.cloudinary.com/dwwqf4p69/image/upload/f_auto,q_auto,w_600/1000137475_ucfue0" className="w-full h-52 object-cover rounded-2xl shadow-xl border-2 border-brand-green/50">
-  <source src="https://res.cloudinary.com/dwwqf4p69/video/upload/f_auto,q_auto,w_600/148326b8820bae6e85b7704abe40bcfb_ed7ggr.mp4" type="video/mp4" />
-</video>
-      <p className="text-center text-white text-[9px] font-bold bg-brand-green/80 rounded-lg px-2 py-0.5 w-full">📱 Samsung S26</p>
-    </div>
-  </div>
-
-</div>
- 
-                  {/* Desktop */}
-                  <div className="hidden lg:flex flex-col items-center gap-4 pt-4">
+                {/* Right Column */}
+                <div className="order-1 lg:order-2 flex justify-center items-center">
+                  <div className="flex flex-col items-center gap-4 pt-4">
                     <div className="bg-brand-card/90 backdrop-blur-md border border-brand-green/30 rounded-2xl px-5 py-3 shadow-2xl flex items-center gap-3 animate-float">
                       <div className="w-10 h-10 rounded-xl bg-brand-green/10 flex items-center justify-center">
                         <Smartphone size={22} className="text-brand-green" />
@@ -199,23 +165,9 @@ export default function Home() {
                         <p className="text-brand-green text-xs">Communication</p>
                       </div>
                     </div>
-                    <div className="flex gap-4">
-                      <div className="relative animate-float" style={{ animationDelay: '0s' }}>
-                       <video autoPlay muted loop playsInline preload="metadata" poster="https://res.cloudinary.com/dwwqf4p69/image/upload/f_auto,q_auto,w_600/1000137475_ucfue0" className="w-56 h-[420px] object-cover rounded-3xl shadow-2xl border-2 border-brand-green/50">
-                 <source src="https://res.cloudinary.com/dwwqf4p69/video/upload/f_auto,q_auto,w_600/c8cf8fe1cac54c10d2d4e640f8ab5412_mtxlid.mp4" type="video/mp4" />
-                 </video>
-                        <p className="absolute bottom-2 left-0 right-0 text-center text-white text-xs font-bold bg-brand-green/80 rounded-xl mx-2 p-1"> iPhone 17 Pro Max all In Stock</p>
-                      </div>
-                      <div className="relative animate-float" style={{ animationDelay: '0.4s' }}>
-                       <video autoPlay muted loop playsInline preload="metadata" poster="https://res.cloudinary.com/dwwqf4p69/image/upload/f_auto,q_auto,w_600/1000137475_ucfue0" className="w-56 h-[420px] object-cover rounded-3xl shadow-2xl border-2 border-brand-green/50">
-                     <source src="https://res.cloudinary.com/dwwqf4p69/video/upload/f_auto,q_auto,w_600/148326b8820bae6e85b7704abe40bcfb_ed7ggr.mp4" type="video/mp4" />
-                     </video>
-                        <p className="absolute bottom-2 left-0 right-0 text-center text-white text-xs font-bold bg-brand-green/80 rounded-xl mx-2 p-1"> Samsung S26 Ultra all In Stock</p>
-                      </div>
-                    </div>
                   </div>
-
                 </div>
+
               </div>
             </div>
           </div>
@@ -254,8 +206,8 @@ export default function Home() {
             )}
           </div>
         </section>
-        
-         {/* Why Choose Us */}
+
+        {/* Why Choose Us */}
         <section className="py-16 md:py-24 bg-brand-dark px-4 md:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10 md:mb-14">
@@ -324,7 +276,7 @@ export default function Home() {
                   <p className="text-gray-500 text-[10px] md:text-xs">Products</p>
                 </div>
                 <div>
-                  <p className="font-syne font-bold text-base md:text-lg text-brand-green">2K+</p>
+                  <p className="font-syne font-bold text-base md:text-lg text-brand-green">3K+</p>
                   <p className="text-gray-500 text-[10px] md:text-xs">Customers</p>
                 </div>
                 <div>
