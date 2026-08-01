@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Search } from 'lucide-react';
 import { supabase, Product } from '@/lib/supabase';
 import { useCart } from '@/components/CartProvider';
 import ProductCard from '@/components/ProductCard';
@@ -12,6 +13,7 @@ export default function SamsungPage() {
   const { items, addToCart, updateQuantity, removeItem, cartCount, openCart, closeCart, isCartOpen } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -32,6 +34,10 @@ export default function SamsungPage() {
     fetchProducts();
   }, []);
 
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="min-h-screen bg-brand-black flex flex-col">
       <Navbar cartCount={cartCount} onCartClick={openCart} />
@@ -39,27 +45,38 @@ export default function SamsungPage() {
       <div className="bg-brand-dark py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <span className="inline-block bg-brand-green/10 text-brand-green text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
-            SAMSUNG DEVICES
+            SAMSUNG GALAXY
           </span>
           <h1 className="font-syne text-4xl md:text-5xl font-bold text-white mb-4">
-            <span className="text-brand-green">Samsung</span> Collection
+            Latest <span className="text-brand-green">Samsung Phones</span>
           </h1>
           <p className="text-gray-400 text-lg">
-            Discover the latest Samsung devices with premium quality and performance.
+            Explore our collection of genuine Samsung Galaxy phones at the best prices in Enugu.
           </p>
         </div>
       </div>
 
       <div className="flex-grow max-w-7xl mx-auto w-full px-4 py-12 md:py-16">
+        <div className="relative mb-8 max-w-md mx-auto">
+          <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search Samsung phones..."
+            className="w-full bg-brand-card border border-brand-border rounded-full pl-11 pr-4 py-3 text-white placeholder-gray-500 focus:border-brand-green focus:ring-1 focus:ring-brand-green outline-none"
+          />
+        </div>
+
         {loading ? (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="bg-brand-card rounded-xl h-72 animate-pulse" />
             ))}
           </div>
-        ) : products.length > 0 ? (
+        ) : filteredProducts.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <ProductCard
                 key={product.id}
                 product={product}
@@ -69,7 +86,7 @@ export default function SamsungPage() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <p className="text-gray-400 text-lg">No Samsung devices available at the moment.</p>
+            <p className="text-gray-400 text-lg">No matching Samsung phones found.</p>
           </div>
         )}
       </div>

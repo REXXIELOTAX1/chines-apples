@@ -9,11 +9,19 @@ interface ProductCardProps {
   onAddToCart: () => void;
 }
 
+const DELIVERY_OPTIONS = [
+  { label: 'Pickup', note: 'Customer will pick up from the shop.' },
+  { label: 'Delivery (Within Enugu)', note: 'Delivery within Enugu, ~1hr.' },
+  { label: 'Delivery (Outside Enugu)', note: 'Delivery outside Enugu, ~24hrs.' },
+];
+
 export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
   const [note, setNote] = useState('');
+  const [deliveryIndex, setDeliveryIndex] = useState(0);
 
   const noteText = note.trim() ? (' (Preference: ' + note.trim() + ')') : '';
   const descText = product.description ? (' Details: ' + product.description) : '';
+  const deliveryText = '\n\n' + DELIVERY_OPTIONS[deliveryIndex].note;
 
   const message =
     'Hi, I want to order ' +
@@ -22,7 +30,8 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
     ' priced at ' +
     formatPrice(product.price) +
     ' from Chine Apples Communication.' +
-    descText;
+    descText +
+    deliveryText;
 
   const whatsappLink = 'https://wa.me/2348109377558?text=' + encodeURIComponent(message);
 
@@ -91,6 +100,18 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             placeholder="Color / storage preference (optional)"
             className="mt-3 w-full bg-brand-dark border border-brand-border rounded-lg px-3 py-2 text-xs text-white placeholder:text-gray-500 focus:outline-none focus:border-brand-green"
           />
+
+          <select
+            value={deliveryIndex}
+            onChange={(e) => setDeliveryIndex(Number(e.target.value))}
+            className="mt-2 w-full bg-brand-dark border border-brand-border rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-green"
+          >
+            {DELIVERY_OPTIONS.map((opt, i) => (
+              <option key={opt.label} value={i}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
 
           <div className="flex flex-col sm:flex-row gap-2 mt-4">
             <button

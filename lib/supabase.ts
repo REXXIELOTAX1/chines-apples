@@ -23,7 +23,7 @@ export type Product = {
 
 export type CartItem = Product & { quantity: number };
 
-export const CATEGORIES = ['All', 'iPhones', 'Samsung', 'Airpods', 'Powerbanks', 'Smartwatches', 'Accessories' ,'Networking' ] as const;
+export const CATEGORIES = ['All', 'iPhones', 'Samsung', 'Airpods', 'Tablets', 'Networking', 'Accessories', 'Phone Cases', 'Powerbanks', 'Smartwatches'] as const;
 
 export const WHATSAPP_NUMBER = '2348109377558';
 

@@ -8,6 +8,7 @@ import {
   Trash2,
   ShoppingCart,
   MessageCircle,
+  Truck,
 } from 'lucide-react';
 import Link from 'next/link';
 import { CartItem, formatPrice, toNumber } from '@/lib/supabase';
@@ -37,14 +38,14 @@ export default function CartSidebar({
     const itemsList = items
       .map((item, index) => {
         const note = notes[item.id]?.trim();
-        const noteText = note ? ` (Preference: ${note})` : '';
-        return `${index + 1}. ${item.name}${noteText} x${item.quantity} - ${formatPrice(item.price)}`;
+        const noteText = note ? (' (Preference: ' + note + ')') : '';
+        return (index + 1) + '. ' + item.name + noteText + ' x' + item.quantity + ' - ' + formatPrice(item.price);
       })
       .join('\n');
-    return `Hi, I want to order from Chine Apples Communication:\n\n${itemsList}\n\nTotal: ${formatPrice(totalPrice)}\n\nPlease confirm my order.`;
+    return 'Hi, I want to order from Chine Apples Communication:\n\n' + itemsList + '\n\nTotal: ' + formatPrice(totalPrice) + '\n\nPlease confirm my order.';
   };
 
-  const whatsappUrl = `https://wa.me/2348109377558?text=${encodeURIComponent(formatCartMessage())}`;
+  const whatsappUrl = 'https://wa.me/2348109377558?text=' + encodeURIComponent(formatCartMessage());
 
   return (
     <>
@@ -52,9 +53,7 @@ export default function CartSidebar({
         <div className="fixed inset-0 bg-black/60 z-40" onClick={onClose} />
       )}
       <div
-        className={`fixed right-0 top-0 h-full w-full max-w-md bg-brand-dark shadow-lg z-50 flex flex-col transition-transform duration-300 ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className={'fixed right-0 top-0 h-full w-full max-w-md bg-brand-dark shadow-lg z-50 flex flex-col transition-transform duration-300 ' + (isOpen ? 'translate-x-0' : 'translate-x-full')}
       >
         <div className="flex items-center justify-between p-6 border-b border-gray-700">
           <div>
@@ -125,6 +124,12 @@ export default function CartSidebar({
 
         {items.length > 0 && (
           <div className="border-t border-gray-700 p-6 space-y-4">
+            <div className="flex items-start gap-2 bg-brand-card border border-brand-border rounded-lg px-3 py-2.5">
+              <Truck className="w-4 h-4 text-brand-green flex-shrink-0 mt-0.5" />
+              <p className="text-xs text-gray-300 leading-relaxed">
+                <span className="text-white font-medium">Delivery:</span> Within Enugu ~1hr · Outside Enugu ~24hrs
+              </p>
+            </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-300 font-medium">Total:</span>
               <span className="text-2xl font-bold text-brand-green">{formatPrice(totalPrice)}</span>

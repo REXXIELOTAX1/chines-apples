@@ -52,26 +52,23 @@ export default function ProductsPage() {
 
       <main className="flex-1">
         {/* Page Header */}
-        <div className="bg-brand-dark py-12 md:py-16">
+        <div className="bg-brand-dark py-6 md:py-8">
           <div className="max-w-7xl mx-auto px-4">
-            <span className="inline-block bg-brand-green/10 text-brand-green text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
-              OUR PRODUCTS
-            </span>
-            <h1 className="font-syne text-4xl md:text-5xl font-bold text-white">
+            <h1 className="font-syne text-3xl md:text-4xl font-bold text-white">
               All <span className="text-brand-green">Products</span>
             </h1>
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="max-w-7xl mx-auto px-4 py-5">
           {/* Filter Tabs */}
-          <div className="mb-6 overflow-x-auto pb-2 scrollbar-hide">
-            <div className="flex gap-3 min-w-min">
+          <div className="mb-4 overflow-x-auto pb-2 scrollbar-hide">
+            <div className="flex gap-2 min-w-min">
               {CATEGORIES.map((category) => (
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-6 py-2 rounded-full font-medium whitespace-nowrap transition-colors ${
+                  className={`px-5 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
                     selectedCategory === category
                       ? 'bg-brand-green text-black font-bold'
                       : 'bg-brand-card text-gray-400 hover:text-white border border-brand-border'
@@ -84,7 +81,7 @@ export default function ProductsPage() {
           </div>
 
           {/* Search Bar */}
-          <div className="mb-8">
+          <div className="mb-5">
             <div className="relative">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
@@ -92,7 +89,7 @@ export default function ProductsPage() {
                 placeholder="Search products..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full bg-brand-card border border-brand-border rounded-lg px-4 py-3 pl-12 text-white placeholder-gray-500 focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green"
+                className="w-full bg-brand-card border border-brand-border rounded-lg px-4 py-2.5 pl-12 text-white placeholder-gray-500 focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green"
               />
             </div>
           </div>
