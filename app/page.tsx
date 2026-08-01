@@ -153,7 +153,7 @@ export default function Home() {
                   </div>
                 </div>
 
-           {/* Right Column */}
+          {/* Right Column */}
                 <div className="order-1 lg:order-2 flex justify-center items-center">
                   <div className="relative w-full max-w-xs lg:max-w-sm">
                     <video
@@ -161,18 +161,15 @@ export default function Home() {
                       muted
                       loop
                       playsInline
-                      preload="metadata"
-                      className="w-full h-[380px] md:h-[460px] object-cover rounded-3xl shadow-2xl border-2 border-brand-green/50"
+                      preload="auto"
+                      className="w-full h-[325px] md:h-[390px] object-cover rounded-3xl shadow-2xl border-2 border-brand-green/50"
                     >
                       <source src="https://res.cloudinary.com/dwwqf4p69/video/upload/v1785571286/VID-20260731-WA0013_rlntgr.mp4" type="video/mp4" />
                     </video>
-                    <p className="absolute bottom-3 left-3 right-3 text-center text-white text-sm font-bold bg-brand-green/80 rounded-xl p-2">
-                       Get Your Genuine Devices
-                    </p>
+                    <div className="absolute inset-0 bg-black/25 rounded-3xl pointer-events-none" />
                   </div>
                 </div>
-
-              </div>
+                </div>
             </div>
           </div>
         </section>
