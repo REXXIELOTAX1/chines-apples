@@ -11,6 +11,7 @@ export type Product = {
   category: string;
   price: number;
   image_url: string;
+  image_urls: string[] | null;
   description: string | null;
   is_featured: boolean | null;
   is_in_stock: boolean | null;
@@ -20,7 +21,6 @@ export type Product = {
   storage: string | null;
   color: string | null;
 };
-
 export type CartItem = Product & { quantity: number };
 
 export const CATEGORIES = ['All', 'iPhones', 'Samsung', 'Airpods', 'Tablets', 'Networking', 'Accessories', 'Phone Cases', 'Powerbanks', 'Smartwatches'] as const;

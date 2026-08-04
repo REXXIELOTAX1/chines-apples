@@ -33,18 +33,33 @@ export default function CartSidebar({
   const totalPrice = useMemo(() => {
     return items.reduce((sum, item) => sum + toNumber(item.price) * item.quantity, 0);
   }, [items]);
+const formatCartMessage = () => {
+  const useFullDetails = items.length <= 7;
 
-  const formatCartMessage = () => {
-    const itemsList = items
-      .map((item, index) => {
-        const note = notes[item.id]?.trim();
-        const noteText = note ? (' (Preference: ' + note + ')') : '';
-        return (index + 1) + '. ' + item.name + noteText + ' x' + item.quantity + ' - ' + formatPrice(item.price);
-      })
-      .join('\n');
-    return 'Hi, I want to order from Chine Apples Communication:\n\n' + itemsList + '\n\nTotal: ' + formatPrice(totalPrice) + '\n\nPlease confirm my order.';
-  };
+  const itemsList = items
+    .map((item, index) => {
+      const note = notes[item.id]?.trim();
+      const noteText = note ? ` (Pref: ${note})` : '';
 
+      let detailText = '';
+      if (useFullDetails && item.description) {
+        detailText = '\n   Details: ' + item.description;
+      } else {
+        const specParts = [item.storage, item.color].filter(Boolean).join(' · ');
+        if (specParts) detailText = ` [${specParts}]`;
+      }
+
+      return `${index + 1}. ${item.name}${detailText}${noteText} x${item.quantity} - ${formatPrice(item.price)}`;
+    })
+    .join(useFullDetails ? '\n\n' : '\n');
+
+  return (
+    'Hi, I want to order from Chine Apples Communication:\n\n' +
+    itemsList +
+    '\n\nTotal: ' + formatPrice(totalPrice) +
+    '\n\nPlease confirm my order.'
+  );
+};
   const whatsappUrl = 'https://wa.me/2348109377558?text=' + encodeURIComponent(formatCartMessage());
 
   return (

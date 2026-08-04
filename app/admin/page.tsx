@@ -17,7 +17,7 @@ type ProductForm = {
   old_price: string;
   storage: string | null;
   color: string | null;
-  image_url: string;
+  image_urls: string[];
   description: string | null;
   is_featured: boolean;
   is_in_stock: boolean;
@@ -31,13 +31,12 @@ const emptyForm: ProductForm = {
   old_price: '',
   storage: '',
   color: '',
-  image_url: '',
+  image_urls: [],
   description: '',
   is_featured: false,
   is_in_stock: true,
   is_discounted: false,
 };
-
 export default function AdminPage() {
   const [isAuthed, setIsAuthed] = useState(false);
   const [password, setPassword] = useState('');
@@ -81,18 +80,19 @@ export default function AdminPage() {
     setSaving(true);
 
     const payload = {
-      name: form.name,
-      category: form.category as Product['category'],
-      price: parseInt(form.price, 10),
-      old_price: form.old_price ? parseInt(form.old_price, 10) : null,
-      storage: form.storage ?? null,
-      color: form.color ?? null,
-      image_url: form.image_url,
-      description: form.description ?? null,
-      is_featured: form.is_featured,
-      is_in_stock: form.is_in_stock,
-      is_discounted: form.is_discounted,
-    };
+  name: form.name,
+  category: form.category as Product['category'],
+  price: parseInt(form.price, 10),
+  old_price: form.old_price ? parseInt(form.old_price, 10) : null,
+  storage: form.storage ?? null,
+  color: form.color ?? null,
+  image_url: form.image_urls[0] ?? '',
+  image_urls: form.image_urls,
+  description: form.description ?? null,
+  is_featured: form.is_featured,
+  is_in_stock: form.is_in_stock,
+  is_discounted: form.is_discounted,
+};
 
     if (editingId) {
       const { error } = await supabase
@@ -122,22 +122,22 @@ export default function AdminPage() {
   };
 
   const handleEdit = (product: Product) => {
-    setForm({
-      name: product.name,
-      category: product.category,
-      price: toNumber(product.price).toString(),
-      old_price: product.old_price ? toNumber(product.old_price).toString() : '',
-      storage: product.storage ?? '',
-      color: product.color ?? '',
-      image_url: product.image_url,
-      description: product.description ?? '',
-      is_featured: product.is_featured ?? false,
-      is_in_stock: product.is_in_stock ?? true,
-      is_discounted: product.is_discounted ?? false,
-    });
-    setEditingId(product.id);
-    setShowForm(true);
-  };
+  setForm({
+    name: product.name,
+    category: product.category,
+    price: toNumber(product.price).toString(),
+    old_price: product.old_price ? toNumber(product.old_price).toString() : '',
+    storage: product.storage ?? '',
+    color: product.color ?? '',
+    image_urls: product.image_urls && product.image_urls.length > 0 ? product.image_urls : (product.image_url ? [product.image_url] : []),
+    description: product.description ?? '',
+    is_featured: product.is_featured ?? false,
+    is_in_stock: product.is_in_stock ?? true,
+    is_discounted: product.is_discounted ?? false,
+  });
+  setEditingId(product.id);
+  setShowForm(true);
+};
 
   const handleDelete = async (id: string) => {
     const { error } = await supabase.from('products').delete().eq('id', id);
@@ -351,9 +351,9 @@ export default function AdminPage() {
                 </div>
 
                 <ImageUploadField
-                  value={form.image_url}
-                  onChange={(url: string) => setForm({ ...form, image_url: url })}
-                />
+                     value={form.image_urls}
+                    onChange={(urls: string[]) => setForm({ ...form, image_urls: urls })}
+                    />
 
                 <div>
                   <label className="text-sm text-gray-400 mb-1 block">Description</label>

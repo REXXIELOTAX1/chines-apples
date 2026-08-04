@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ShoppingCart, MessageCircle } from 'lucide-react';
 import { Product, formatPrice, toNumber } from '@/lib/supabase';
+import ImagePreviewModal from './ImagePreviewModal';
 
 interface ProductCardProps {
   product: Product;
@@ -22,6 +23,8 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
   const noteText = note.trim() ? (' (Preference: ' + note.trim() + ')') : '';
   const descText = product.description ? (' Details: ' + product.description) : '';
   const deliveryText = '\n\n' + DELIVERY_OPTIONS[deliveryIndex].note;
+  const [showPreview, setShowPreview] = useState(false);
+  const images = product.image_urls && product.image_urls.length > 0 ? product.image_urls : [product.image_url];
 
   const message =
     'Hi, I want to order ' +
@@ -41,12 +44,20 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
   return (
     <div className="min-w-0 transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,230,118,0.3)]">
       <div className="bg-brand-card border border-brand-border rounded-xl overflow-hidden h-full flex flex-col">
-        <div className="relative w-full aspect-[4/3] overflow-hidden bg-brand-dark">
-          <img
-            src={product.image_url}
-            alt={product.name}
-            className="w-full h-full object-cover"
-          />
+       <div
+  className="relative w-full aspect-[4/3] overflow-hidden bg-brand-dark cursor-pointer"
+  onClick={() => setShowPreview(true)}
+>
+  <img
+    src={product.image_url}
+    alt={product.name}
+    className="w-full h-full object-cover"
+  />
+  {images.length > 1 && (
+    <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-0.5 rounded-full">
+      {images.length} photos
+    </div>
+  )}
           {featured && (
             <div className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">
               HOT
@@ -132,7 +143,14 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             </a>
           </div>
         </div>
-      </div>
+        </div>
+      {showPreview && (
+        <ImagePreviewModal
+          images={images}
+          productName={product.name}
+          onClose={() => setShowPreview(false)}
+        />
+      )}
     </div>
   );
 }
