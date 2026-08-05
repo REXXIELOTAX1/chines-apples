@@ -8,12 +8,13 @@ import ProductCard from '@/components/ProductCard';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CartSidebar from '@/components/CartSidebar';
-
+import ImagePreviewModal from '@/components/ImagePreviewModal';
 export default function SamsungPage() {
   const { items, addToCart, updateQuantity, removeItem, cartCount, openCart, closeCart, isCartOpen } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('')
+  const [previewProduct, setPreviewProduct] = useState<Product | null>(null);;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -77,11 +78,12 @@ export default function SamsungPage() {
         ) : filteredProducts.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {filteredProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                onAddToCart={() => addToCart(product)}
-              />
+             <ProductCard
+  key={product.id}
+  product={product}
+  onAddToCart={() => addToCart(product)}
+  onPreview={() => setPreviewProduct(product)}
+/>
             ))}
           </div>
         ) : (
@@ -99,6 +101,18 @@ export default function SamsungPage() {
         onUpdateQuantity={updateQuantity}
         onRemoveItem={removeItem}
       />
+
+      {previewProduct && (
+  <ImagePreviewModal
+    images={
+      previewProduct.image_urls && previewProduct.image_urls.length > 0
+        ? previewProduct.image_urls
+        : [previewProduct.image_url]
+    }
+    productName={previewProduct.name}
+    onClose={() => setPreviewProduct(null)}
+  />
+)}
     </div>
   );
 }
