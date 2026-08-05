@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface ImagePreviewModalProps {
@@ -17,9 +18,14 @@ export default function ImagePreviewModal({
   onClose,
 }: ImagePreviewModalProps) {
   const [index, setIndex] = useState(initialIndex);
+  const [mounted, setMounted] = useState(false);
 
   const goNext = () => setIndex((prev) => (prev + 1) % images.length);
   const goPrev = () => setIndex((prev) => (prev - 1 + images.length) % images.length);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -31,11 +37,18 @@ export default function ImagePreviewModal({
     return () => window.removeEventListener('keydown', handleKey);
   }, [images.length]);
 
-  if (images.length === 0) return null;
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
 
-  return (
+  if (images.length === 0 || !mounted) return null;
+
+  const modalContent = (
     <div
-      className="fixed inset-0 bg-black/90 z-[60] flex items-center justify-center p-4"
+      className="fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center p-4"
       onClick={onClose}
     >
       <button
@@ -96,4 +109,6 @@ export default function ImagePreviewModal({
       )}
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 }
