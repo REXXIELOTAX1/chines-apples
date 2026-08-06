@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Shield, Truck, HeadphonesIcon, Award, Smartphone, Tag, Headphones, Tablet, Wifi, Cable, ShieldCheck } from 'lucide-react';
+import { Shield, Truck, HeadphonesIcon, Award, Tag, Users, ShieldCheck, HelpCircle, ArrowRight } from 'lucide-react';
 import { supabase, Product, getWhatsAppUrl } from '@/lib/supabase';
 import { useCart } from '@/components/CartProvider';
 import ProductCard from '@/components/ProductCard';
@@ -10,6 +10,18 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CartSidebar from '@/components/CartSidebar';
 import ImagePreviewModal from '@/components/ImagePreviewModal';
+
+const categories = [
+  { name: 'iPhones', href: '/iphones', image: '/images/categories/iphone.jpg' },
+  { name: 'Samsung', href: '/samsung', image: '/images/categories/samsung.jpg' },
+  { name: 'Pixel', href: '/pixel', image: '/images/categories/pixel.jpg' },
+  { name: 'AirPods', href: '/airpods', image: '/images/categories/airpods.jpg' },
+  { name: 'Speakers', href: '/speakers', image: '/images/categories/speaker.jpg' },
+  { name: 'Games', href: '/games', image: '/images/categories/games.jpg' },
+  { name: 'Tablets', href: '/tablets', image: '/images/categories/tablet.jpg' },
+  { name: 'Networking', href: '/networking', image: '/images/categories/networking.jpg' },
+  { name: 'Accessories', href: '/accessories', image: '/images/categories/accessories.jpg' },
+];
 
 export default function Home() {
   const { items, addToCart, updateQuantity, removeItem, cartCount, openCart, closeCart, isCartOpen } = useCart();
@@ -62,7 +74,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <Link
             href="/deals"
- className="block bg-red-950/40 border-2 border-brand-green rounded-xl p-3 md:p-4 pt-5 md:pt-6 relative hover:border-brand-green-dark transition-colors shadow-lg shadow-brand-green/20"          >
+            className="block bg-red-950/40 border-2 border-brand-green rounded-xl p-3 md:p-4 pt-5 md:pt-6 relative hover:border-brand-green-dark transition-colors shadow-lg shadow-brand-green/20"
+          >
             <div className="absolute -top-3 left-4 bg-red-600 text-white text-[10px] md:text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 whitespace-nowrap shadow-md">
               🔥 HOT DEALS!
             </div>
@@ -89,8 +102,9 @@ export default function Home() {
           </Link>
         </div>
       </div>
+
       <main className="bg-brand-black">
-        
+
         {/* Hero Section */}
         <section className="relative min-h-[100dvh] md:min-h-screen flex items-center overflow-hidden">
           <div className="absolute inset-0 z-0" style={heroBgStyle} />
@@ -155,7 +169,7 @@ export default function Home() {
                   </div>
                 </div>
 
-          {/* Right Column */}
+                {/* Right Column */}
                 <div className="order-1 lg:order-2 flex justify-center items-center">
                   <div className="relative w-full max-w-xs lg:max-w-sm">
                     <video
@@ -171,74 +185,115 @@ export default function Home() {
                     <div className="absolute inset-0 bg-black/25 rounded-3xl pointer-events-none" />
                   </div>
                 </div>
-                </div>
+              </div>
             </div>
           </div>
         </section>
-<div className="px-4 md:px-8 pt-8">
-  <div className="max-w-7xl mx-auto">
-    <div className="flex items-center justify-between mb-4">
-      <h2 className="font-syne text-xl md:text-2xl font-bold text-white">Shop by Category</h2>
-      <Link href="/products" className="text-brand-green text-sm font-medium hover:underline flex items-center gap-1">
-        View All →
-      </Link>
+
+        {/* Shop by Category */}
+        <div className="py-10 md:py-14 bg-brand-black">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-12">
+              <span className="inline-block bg-brand-green/10 text-brand-green text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+                BROWSE
+              </span>
+              <h2 className="font-syne text-3xl md:text-4xl font-bold text-white">
+                Shop by <span className="text-brand-green">Category</span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {categories.map((cat) => (
+                <a
+                  key={cat.name}
+                  href={cat.href}
+                  className="group relative h-72 rounded-2xl overflow-hidden border border-brand-border hover:border-brand-green transition-colors"
+                >
+                  <img
+                    src={cat.image}
+                    alt={cat.name}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute bottom-4 left-4">
+                    <span className="text-white font-syne font-bold text-xl">{cat.name}</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Trust Links */}
+<section className="relative py-16 md:py-24 bg-brand-black px-4 md:px-8 overflow-hidden">
+  <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-green/10 rounded-full blur-3xl" />
+  <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl" />
+
+  <div className="relative max-w-5xl mx-auto">
+    <div className="text-center mb-10 md:mb-14">
+      <span className="inline-block bg-brand-green/10 text-brand-green text-sm font-semibold px-4 py-1.5 rounded-full mb-4 border border-brand-green/20">
+        TRUST & SUPPORT
+      </span>
+      <h2 className="font-syne text-3xl md:text-4xl font-bold text-white">
+        Everything You <span className="text-brand-green">Need to Know</span>
+      </h2>
     </div>
-    <div className="grid grid-cols-3 md:grid-cols-7 gap-3 md:gap-4">
+
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 md:gap-6">
       {[
-        { label: 'iPhones', href: '/iphones', Icon: Smartphone },
-        { label: 'Samsung', href: '/samsung', Icon: Smartphone },
-        { label: 'AirPods', href: '/airpods', Icon: Headphones },
-        { label: 'Tablets', href: '/tablets', Icon: Tablet },
-        { label: 'Networking', href: '/networking', Icon: Wifi },
-        { label: 'Accessories', href: '/accessories', Icon: Cable },
-        { label: 'Phone Cases', href: '/phone-cases', Icon: ShieldCheck },
-      ].map((cat) => (
+        {
+          href: '/about',
+          image: '/images/trust/about.jpg',
+          title: 'About Us',
+          desc: 'Learn our story and why customers trust us.',
+          cta: 'Learn more',
+          accent: 'text-blue-400',
+        },
+        {
+          href: '/warranty',
+          image: '/images/trust/warranty.jpg',
+          title: 'Warranty Policy',
+          desc: 'Shop with full confidence, fully covered.',
+          cta: 'View policy',
+          accent: 'text-brand-green',
+        },
+        {
+          href: '/faq',
+          image: '/images/trust/faq.jpg',
+          title: 'FAQs',
+          desc: 'Quick answers to common questions.',
+          cta: 'Get answers',
+          accent: 'text-purple-400',
+        },
+      ].map((card) => (
         <Link
-          key={cat.href}
-          href={cat.href}
-          className="bg-brand-card border border-brand-border rounded-xl p-4 flex flex-col items-center gap-2 hover:border-brand-green transition-colors"
+          key={card.title}
+          href={card.href}
+          className="group relative bg-brand-card border border-brand-border rounded-2xl overflow-hidden hover:-translate-y-1.5 hover:border-brand-green/50 transition-all duration-300 shadow-lg"
         >
-          <cat.Icon size={28} className="text-brand-green" />
-          <span className="text-white text-xs md:text-sm font-medium text-center">{cat.label}</span>
+          {/* Image */}
+          <div className="relative h-36 md:h-40 w-full overflow-hidden">
+            <img
+              src={card.image}
+              alt={card.title}
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-card via-brand-card/40 to-transparent" />
+          </div>
+
+          {/* Copy */}
+          <div className="p-6 md:p-8 pt-4 md:pt-5">
+            <h3 className="text-white font-syne font-bold text-lg mb-1.5">{card.title}</h3>
+            <p className="text-gray-500 text-sm mb-4">{card.desc}</p>
+            <span className={`inline-flex items-center gap-1 text-sm font-semibold ${card.accent}`}>
+              {card.cta} <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+            </span>
+          </div>
         </Link>
       ))}
     </div>
   </div>
-</div>
-        {/* Featured Products */}
-        <section className="py-16 md:py-24 bg-brand-black px-4 md:px-8">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-10 md:mb-14">
-              <p className="text-brand-green text-[10px] md:text-xs font-semibold tracking-[0.2em] uppercase mb-3">Featured Products</p>
-              <h2 className="font-syne font-bold text-heading">
-                <span className="text-white">Latest</span> <span className="text-brand-green">Gadgets</span>
-              </h2>
-              <div className="w-16 h-0.5 bg-brand-green mx-auto mt-4 rounded-full" />
-            </div>
-            {loading ? (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
-                {Array.from({ length: 8 }).map((_, index) => (
-                  <div key={index} className="animate-pulse bg-brand-card rounded-xl h-64 md:h-72" />
-                ))}
-              </div>
-            ) : products.length > 0 ? (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
-                {products.map((product) => (
-                  <ProductCard
-  key={product.id}
-  product={product}
-  onAddToCart={() => addToCart(product)}
-  onPreview={() => setPreviewProduct(product)}
-/>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <p className="text-gray-500">No products available yet.</p>
-              </div>
-            )}
-          </div>
-        </section>
+</section>
 
         {/* Why Choose Us */}
         <section className="py-16 md:py-24 bg-brand-dark px-4 md:px-8">
@@ -279,7 +334,7 @@ export default function Home() {
       </main>
 
       <Footer />
-     <Footer />
+
       <CartSidebar
         isOpen={isCartOpen}
         onClose={closeCart}
