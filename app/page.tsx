@@ -92,7 +92,7 @@ export default function Home() {
                   <span className="absolute bottom-1 right-1 w-1 h-1 bg-red-400 rounded-full" />
                 </div>
                 <div>
-                  <p className="text-white font-bold text-sm md:text-base">Discounted Devices</p>
+                  <p className="text-white font-bold text-sm md:text-base">Awoof Devices</p>
                 </div>
               </div>
               <span className="bg-red-600 text-white text-xs md:text-sm font-semibold px-3 md:px-4 py-2 rounded-lg whitespace-nowrap hover:bg-red-700 transition-colors">
@@ -191,38 +191,40 @@ export default function Home() {
         </section>
 
         {/* Shop by Category */}
-     <div className="py-8 md:py-14 bg-brand-black">
-  <div className="max-w-7xl mx-auto px-3 md:px-4">
-    <div className="text-center mb-6 md:mb-12">
-      <span className="inline-block bg-brand-green/10 text-brand-green text-xs md:text-sm font-semibold px-3 md:px-4 py-1 md:py-1.5 rounded-full mb-2 md:mb-4">
-        BROWSE
-      </span>
-      <h2 className="font-syne text-xl md:text-4xl font-bold text-white">
-        Shop by <span className="text-brand-green">Category</span>
-      </h2>
-    </div>
+        <div className="py-10 md:py-14 bg-brand-black">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-12">
+              <span className="inline-block bg-brand-green/10 text-brand-green text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+                BROWSE
+              </span>
+              <h2 className="font-syne text-3xl md:text-4xl font-bold text-white">
+                Shop by <span className="text-brand-green">Category</span>
+              </h2>
+            </div>
 
-    <div className="grid grid-cols-3 gap-2 md:gap-6">
-      {categories.map((cat) => (
-        <a
-          key={cat.name}
-          href={cat.href}
-          className="group relative h-20 sm:h-28 md:h-64 rounded-lg md:rounded-2xl overflow-hidden border border-brand-border hover:border-brand-green transition-colors"
-        >
-          <img
-            src={cat.image}
-            alt={cat.name}
-            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-          <div className="absolute bottom-1 left-1.5 md:bottom-4 md:left-4">
-            <span className="text-white font-syne font-bold text-[10px] sm:text-xs md:text-xl">{cat.name}</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {categories.map((cat) => (
+                <a
+                  key={cat.name}
+                  href={cat.href}
+                  
+                  className="group relative h-72 rounded-2xl overflow-hidden border border-brand-border hover:border-brand-green transition-colors"
+                >
+                  <img
+                    src={cat.image}
+                    alt={cat.name}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute bottom-4 left-4">
+                    <span className="text-white font-syne font-bold text-xl">{cat.name}</span>
+                  </div>
+                </a>
+              ))}
+            </div>
           </div>
-        </a>
-      ))}
-    </div>
-  </div>
-</div>
+        </div>
+
         {/* Trust Links */}
 <section className="relative py-16 md:py-24 bg-brand-black px-4 md:px-8 overflow-hidden">
   <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-green/10 rounded-full blur-3xl" />
