@@ -14,7 +14,7 @@ import ImagePreviewModal from '@/components/ImagePreviewModal';
 const categories = [
   { name: 'iPhones', href: '/iphones', image: '/images/categories/iphone.jpg' },
   { name: 'Samsung', href: '/samsung', image: '/images/categories/samsung.jpg' },
-  { name: 'Pixel', href: '/pixel', image: '/images/categories/pixel.jpg' },
+  { name: 'Google Pixel', href: '/pixel', image: '/images/categories/pixel.jpg' },
   { name: 'AirPods', href: '/airpods', image: '/images/categories/airpods.jpg' },
   { name: 'Speakers', href: '/speakers', image: '/images/categories/speaker.jpg' },
   { name: 'Games', href: '/games', image: '/images/categories/games.jpg' },
